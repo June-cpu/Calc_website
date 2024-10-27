@@ -1,66 +1,60 @@
-function addRow() {
-    const inputBoxes = document.querySelector(".inputBoxes");
-    const rowCount = inputBoxes.querySelectorAll(".inputRow").length;
-
-    if (rowCount < 5) {
-        const newRow = document.createElement("div");
-        newRow.className = "inputRow";
-        newRow.innerHTML = `
-            <div class="contentName">
-                <input class="className" placeholder="Course Name" />
-            </div>
-            <div class="contentGrade">
-                <input class="classGrade" placeholder="A" />
-            </div>
-            <div class="contentCredit">
-                <input class="classCredit" placeholder="4" type="number" min="0" step="0.5" />
-                <button class="button" onclick="removeRow(this)">X</button>
-            </div>
-        `;
-        inputBoxes.appendChild(newRow);
-    } else {
-        alert("You can only add up to 5 courses.");
-    }
-}
-
-function removeRow(button) {
-    const inputBoxes = document.querySelector(".inputBoxes");
-    const rowCount = inputBoxes.querySelectorAll(".inputRow").length;
-
-    if (rowCount > 1) {
-        button.parentElement.parentElement.remove();
-    } else {
-        alert("You must have at least one course.");
-    }
-}
-
+// Function to calculate GPA
 function calculateGPA() {
-    const rows = document.querySelectorAll(".inputRow");
-    let totalCredits = 0;
+    const gradePoints = {
+        'A+': 4.0, 'A': 4.0, 'A-': 3.7,
+        'B+': 3.3, 'B': 3.0, 'B-': 2.7,
+        'C+': 2.3, 'C': 2.0, 'C-': 1.7,
+        'D+': 1.3, 'D': 1.0, 'F': 0.0
+    };
     let totalPoints = 0;
+    let totalCredits = 0;
 
-    rows.forEach((row) => {
-        const grade = row.querySelector(".classGrade").value.toUpperCase();
-        const credits = parseFloat(row.querySelector(".classCredit").value);
-        const gradePoints = getGradePoints(grade);
+    const rows = document.querySelectorAll(".inputRow");
+    rows.forEach(row => {
+        const grade = row.querySelector(".classGrade").value;
+        const credit = parseFloat(row.querySelector(".classCredit").value);
 
-        if (!isNaN(credits) && gradePoints !== null) {
-            totalCredits += credits;
-            totalPoints += gradePoints * credits;
+        if (grade in gradePoints && !isNaN(credit)) {
+            totalPoints += gradePoints[grade] * credit;
+            totalCredits += credit;
         }
     });
 
     const gpa = totalCredits ? (totalPoints / totalCredits).toFixed(2) : 0;
-    document.querySelector(".showResult").innerText = `Your GPA is: ${gpa}`;
+    document.querySelector(".showResult").textContent = `GPA: ${gpa}`;
 }
 
-function getGradePoints(grade) {
-    switch (grade) {
-        case "A": return 4.0;
-        case "B": return 3.0;
-        case "C": return 2.0;
-        case "D": return 1.0;
-        case "F": return 0.0;
-        default: return null;
-    }
+// Function to add a new row for additional courses
+function addRow() {
+    const inputBoxes = document.querySelector(".inputBoxes");
+    const newRow = document.createElement("div");
+    newRow.classList.add("inputRow");
+
+    newRow.innerHTML = `
+        <input class="className" placeholder="Course Name" />
+        <select class="classGrade">
+            <option value="A+">A+</option>
+            <option value="A">A</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B">B</option>
+            <option value="B-">B-</option>
+            <option value="C+">C+</option>
+            <option value="C">C</option>
+            <option value="C-">C-</option>
+            <option value="D+">D+</option>
+            <option value="D">D</option>
+            <option value="F">F</option>
+        </select>
+        <input class="classCredit" placeholder="Credits (e.g., 4)" />
+        <button class="button" onclick="removeRow(this)">X</button>
+    `;
+
+    inputBoxes.appendChild(newRow);
+}
+
+// Function to remove a row
+function removeRow(button) {
+    const row = button.closest(".inputRow");
+    row.remove();
 }

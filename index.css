@@ -1,116 +1,81 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f3e8ff;
-    color: #4e2a84;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    place-items: center;
     height: 100vh;
-}
-
-.container {
-    width: 80%;
-    max-width: 600px;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 0;
+    background-color: #e6e0f8; /* Light purple background */
 }
 
 h1 {
-    margin-bottom: 20px;
-    color: #4e2a84;
+    text-align: center;
+    color: #4b0082; /* Dark purple for title */
+}
+
+.main {
+    width: 600px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h3 {
+    color: #4b0082; /* Dark purple */
+    margin-bottom: 5px;
 }
 
 .inputBoxes {
     display: flex;
     flex-direction: column;
+    gap: 10px;
 }
 
 .inputRow {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
+    gap: 10px;
+    margin-top: 10px;
 }
 
-.contentName, .contentGrade, .contentCredit {
-    flex: 1;
-    margin: 0 5px;
-}
-
-input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
+input, select {
+    background-color: #f0e6fa; /* Light purple */
+    border: none;
+    font-size: 16px;
+    color: #4b0082;
     border-radius: 5px;
-    font-size: 1em;
+    padding: 5px 10px;
 }
 
-input::placeholder {
-    color: #ccc;
+.className {
+    width: 250px;
+}
+
+.classGrade,
+.classCredit {
+    width: 80px;
 }
 
 .button {
-    background-color: #d63384;
-    color: #fff;
+    background-color: #d1b3ff; /* Medium purple */
     border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
     padding: 5px 10px;
-    font-size: 1em;
-    cursor: pointer;
-    border-radius: 5px;
 }
 
-.button:hover {
-    background-color: #b4296f;
-}
-
-.controls {
-    margin-top: 15px;
-}
-
-.controls button {
-    padding: 10px 15px;
-    margin: 5px;
-    font-size: 1em;
-    background-color: #6a1b9a;
-    color: #fff;
+.calculateGPA button,
+.addRow button {
+    background-color: #6a0dad; /* Darker purple for buttons */
+    color: white;
     border: none;
-    cursor: pointer;
     border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 8px 16px;
 }
 
-.controls button:hover {
-    background-color: #4e2a84;
-}
-
-.showResult {
-    font-size: 1.2em;
-    margin-top: 15px;
-    color: #4e2a84;
-}
-
-/* Media queries for responsiveness */
-@media (max-width: 600px) {
-    .container {
-        width: 90%;
-    }
-
-    .inputRow {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .controls button {
-        width: 100%;
-        margin: 5px 0;
-    }
+.result h3 {
+    color: #4b0082;
 }
